@@ -1,0 +1,22 @@
+- Proposal
+  - Block Diagrams
+  - Sub-Block Diagrams
+  - Sub-Sub-Block Diagrams
+  - Timing Diagrams
+  - State Transition Diagrams
+  - I/O Mapping
+  - Project Usage Flowchart
+  - Flip Flop Estimation
+- FPGA Demonstration
+  - 12 MHz clock
+  - Shield
+    - 16 Pushbuttons
+    - Some other stuff
+  - Bare
+    - Pin Mapping
+- ASIC Tape-out
+  - 10 MHz clock
+  - Active Low Chip Select
+  - 38 GPIO Header
+    - 34 Usuable Pins
+    - 4 Mux Project Select Pins

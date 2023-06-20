@@ -4,7 +4,7 @@
 * Emmanuel Chang
 * Kai Ze Ee
 * Stuti Rastogi
-* Yashashwini Singh
+* Yash Singh
 * Vishnu Lagudu
 
 ## [Project Name]

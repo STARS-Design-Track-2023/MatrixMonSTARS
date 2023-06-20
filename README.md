@@ -1,7 +1,7 @@
 # STARS 2023 Final Design Project
 
 ## MatrixMonSTARS
-* Emmanuel Chan
+* Emmanuel Chang
 * Kai Ze Ee
 * Stuti Rastogi
 * Yash Singh

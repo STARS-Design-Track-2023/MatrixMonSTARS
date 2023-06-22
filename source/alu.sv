@@ -17,9 +17,10 @@ module alu (
     new_op2 = op2;
 
         //two's complement conditional
-        if (opcode[1]) begin 
-            new_op2[3:0] = 4'b1001 + (~op2[3:0] + 1) + 1;
-            new_op2[7:4] = 4'b1001 + (~op2[7:4] + 1) + 1;
+        if (opcode == 2'b10)  begin 
+          new_op2[8] = ~op2[8]; //flip most sig bit to indicate sign
+          new_op2[3:0] = 4'b1001 - (op2[3:0]) + 1; //9's comp
+          new_op2[7:4] = 4'b1001 - (op2[7:4]);
         end
 
         //lsd sequence

@@ -1,0 +1,22 @@
+** VVP Stop(0) **
+** Flushing output streams.
+** Current simulation time is 0 ticks.
+** Continue **
+VCD info: dumpfile dump.vcd opened for output.
+VCD warning: $dumpvars: Package ($unit) is not dumpable with VCD.
+Correct LSD result value during (37+12) test case
+Correct MSD result value during (37+12) test case
+Correct carry_out value during (37+12) test case
+Correct LSD result value during (15+05) test case
+Correct MSD result value during (15+05) test case
+Correct carry_out value during (15+05) test case
+Correct LSD result value during (81+81) test case
+Correct MSD result value during (81+81) test case
+Correct carry_out value during (81+81) test case
+ERROR: source/tb_alu.sv:54: Incorrect LSD result value during (99-55) test case
+       Time: 195000  Scope: tb_alu.check_output
+ERROR: source/tb_alu.sv:62: Incorrect MSD result value during (99-55) test case
+       Time: 195000  Scope: tb_alu.check_output
+ERROR: source/tb_alu.sv:70: Incorrect carry_out value during (99-55) test case
+       Time: 195000  Scope: tb_alu.check_output
+source/tb_alu.sv:187: $finish called at 195000 (10ps)

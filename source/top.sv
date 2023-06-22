@@ -16,5 +16,4 @@ module top
   input  logic txready, rxready
 );
 
-key_encoder u1(.clk(hwclk), .nrst(~pb[19]), .keypad(pb[12:0]), .keycode(right[3:0]), .keystrobe(blue));
 endmodule

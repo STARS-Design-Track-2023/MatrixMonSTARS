@@ -6,7 +6,7 @@ module digit_decoder(
  );
 
  always_comb begin
-    if(keystrobe && keycode >= 4'b0000 && keycode < 4'b1010) begin
+    if(keystrobe && keycode < 4'b1010) begin
         digitCode = keycode;
         isdig = 1;
     end

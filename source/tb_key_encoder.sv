@@ -301,6 +301,21 @@ module tb_key_encoder();
     @(negedge tb_clk);
     check_output_keycode("is it two press.");
     check_output_strobe("is it two press.");
+
+    tb_test_num = tb_test_num + 1;
+    tb_test_case = "Testing button press with reset press.";
+    inactivate_signals();
+    reset_dut();
+    tb_nrst = 0;
+    tb_keypad = 13'b0000000000010;
+    tb_expected_keystrobe = 0;
+    tb_key_code_expected = 4'b0000;
+    @(posedge tb_clk);
+    @(posedge tb_clk);
+    @(negedge tb_clk);
+    check_output_keycode("is it reset press.");
+    check_output_strobe("is it reset press.");
+    $finish; 
     $finish; 
     end
 endmodule

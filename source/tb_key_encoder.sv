@@ -315,7 +315,6 @@ module tb_key_encoder();
     @(negedge tb_clk);
     check_output_keycode("is it reset press.");
     check_output_strobe("is it reset press.");
-    $finish; 
-    $finish; 
+    $finish;
     end
 endmodule

@@ -12,6 +12,7 @@ module digit_decoder(
         else begin
             digitCode <= next_digitCode;
         end 
+    end
     always_comb begin
         if(keystrobe && keycode < 4'b1010) begin
             next_digitCode = keycode;

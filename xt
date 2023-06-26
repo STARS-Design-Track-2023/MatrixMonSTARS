@@ -1,0 +1,31 @@
+** VVP Stop(0) **
+** Flushing output streams.
+** Current simulation time is 0 ticks.
+** Continue **
+VCD info: dumpfile dump.vcd opened for output.
+VCD warning: $dumpvars: Package ($unit) is not dumpable with VCD.
+Correct code output when tested. This case is called power on RESET.
+Correct strobe utput  when tested. This case is called power on RESET.
+Correct code output when tested. This case is called strobe 0 and keyinput 10.
+Correct strobe utput  when tested. This case is called strobe 0 and keyinput 10.
+Correct code output when tested. This case is called strobe 0 and keyinput 3.
+Correct strobe utput  when tested. This case is called strobe 0 and keyinput 3.
+Correct code output when tested. This case is called strobe 0 and keyinput 9.
+Correct strobe utput  when tested. This case is called strobe 0 and keyinput 9.
+Correct code output when tested. This case is called strobe 0 and keyinput 7.
+Correct strobe utput  when tested. This case is called strobe 0 and keyinput 7.
+Correct code output when tested. This case is called strobe 0 and keyinput 11.
+Correct strobe utput  when tested. This case is called strobe 0 and keyinput 11.
+Correct code output when tested. This case is called strobe 1 and keyinput 9.
+Correct strobe utput  when tested. This case is called strobe 1 and keyinput 9.
+Correct code output when tested. This case is called strobe 1 and keyinput 10.
+Correct strobe utput  when tested. This case is called strobe 1 and keyinput 10.
+Correct code output when tested. This case is called strobe 1 and keyinput 12.
+Correct strobe utput  when tested. This case is called strobe 1 and keyinput 12.
+Correct code output when tested. This case is called strobe 1 and keyinput 1.
+Correct strobe utput  when tested. This case is called strobe 1 and keyinput 1.
+Correct code output when tested. This case is called strobe 1 and keyinput 2.
+Correct strobe utput  when tested. This case is called strobe 1 and keyinput 2.
+Correct code output when tested. This case is called strobe 1 and keyinput 8.
+Correct strobe utput  when tested. This case is called strobe 1 and keyinput 8.
+source/tb_digit_decoder.sv:256: $finish called at 600000 (10ps)

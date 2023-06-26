@@ -5,7 +5,9 @@ module digit_decoder(
     output logic isdig,
     output logic [3:0] digitCode
  );
-    logic [3:0] next_digitCode;
+    logic [3:0] next_digitCode; // Intermediate Signal
+
+    // Use a flip flop to remember the  current value inputed
     always_ff @(posedge clk, negedge nrst) begin
         if(0 == nrst) begin
             digitCode <= 0;
@@ -15,12 +17,12 @@ module digit_decoder(
         end 
     end
     always_comb begin
-        if(keystrobe && keycode < 4'b1010) begin
+        if(keystrobe && keycode < 4'b1010 && nrst == 1) begin
             next_digitCode = keycode;
             isdig = 1;
         end
         else begin
-            next_digitCode = digitCode;
+            next_digitCode = 4'b0000;
             isdig = 0;
         end
     end

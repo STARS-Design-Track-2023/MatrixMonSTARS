@@ -1,4 +1,5 @@
 module digit_decoder(
+    input logic clk, nrst,
     input logic keystrobe,
     input logic [3:0] keycode,
     output logic isdig,

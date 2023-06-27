@@ -1,9 +1,0 @@
-** VVP Stop(0) **
-** Flushing output streams.
-** Current simulation time is 0 ticks.
-** Continue **
-VCD info: dumpfile dump.vcd opened for output.
-VCD warning: $dumpvars: Package ($unit) is not dumpable with VCD.
-Correct code output when tested. Ths case is called state 1
-Correct strobe output when tested. This case is called state 1
-source/tb_key_encoder_binary.sv:121: $finish called at 70000 (10ps)

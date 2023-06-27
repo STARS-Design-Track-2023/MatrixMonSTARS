@@ -1,0 +1,138 @@
+$date
+	Tue Jun 27 14:50:21 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	10ps
+$end
+$scope module tb_key_encoder_binary $end
+$var wire 1 ! tb_move_on $end
+$var wire 4 " tb_keycode [3:0] $end
+$var parameter 32 # CLK_PERIOD $end
+$var reg 1 $ tb_check $end
+$var reg 1 % tb_clk $end
+$var reg 4 & tb_keycode_expected [3:0] $end
+$var reg 2 ' tb_keypad [1:0] $end
+$var reg 1 ( tb_mismatch $end
+$var reg 1 ) tb_move_on_expected $end
+$var reg 1 * tb_nrst $end
+$var integer 32 + tb_test_num [31:0] $end
+$scope module DUT $end
+$var wire 1 % clk $end
+$var wire 2 , keypad [1:0] $end
+$var wire 1 * nrst $end
+$var reg 1 - code_choice $end
+$var reg 4 . keycode [3:0] $end
+$var reg 2 / keypad_async [1:0] $end
+$var reg 2 0 keypad_i [1:0] $end
+$var reg 2 1 keypad_sync [1:0] $end
+$var reg 1 ! move_on $end
+$var reg 4 2 next_state [3:0] $end
+$var reg 4 3 partial_code [3:0] $end
+$var reg 4 4 state [3:0] $end
+$var reg 1 5 strobe $end
+$var reg 1 6 use_code $end
+$upscope $end
+$scope task check_output_keycode $end
+$upscope $end
+$scope task check_output_move_on $end
+$upscope $end
+$scope task inactivate_signals $end
+$upscope $end
+$scope task reset_dut $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b1100100 #
+$end
+#0
+$dumpvars
+06
+05
+bx 4
+bx 3
+bx 2
+bx 1
+bx 0
+bx /
+bx .
+0-
+bx ,
+bx +
+x*
+x)
+x(
+bx '
+bx &
+0%
+x$
+bx "
+0!
+$end
+#10
+b0 '
+b0 ,
+1*
+#20
+b0 3
+b0 2
+b0 "
+b0 .
+b0 4
+b0 0
+b0 1
+b0 /
+0*
+#5000
+1%
+#10000
+0%
+#15000
+1%
+#20000
+1*
+0%
+#25000
+1%
+#30000
+0%
+#35000
+1%
+#40000
+b10 '
+b10 ,
+b1 &
+0)
+0%
+#45000
+b10 /
+1%
+#50000
+0%
+#55000
+b1 3
+b1 2
+16
+1-
+15
+b10 1
+1%
+#60000
+0%
+#65000
+06
+0-
+05
+b1 "
+b1 .
+b1 4
+b10 0
+1%
+#70000
+0(
+1$
+0%

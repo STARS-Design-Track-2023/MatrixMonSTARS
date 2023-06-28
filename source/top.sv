@@ -35,6 +35,7 @@ module top
   
   new_operand_buffer u5(.clk(hwclk), .nrst(~reset), .store_digit(store_dig), .enter(enter), .result_ready(result_ready), .digit(digit), .op1(op1), .sign(sign), .result(result), .ssdec(seg));
 
+  last_operand_buffer u6(.clk(hwclk), .nrst(~reset), .enter(enter), .op1(op1), .op2(op2));
 
   alu u7(.op1(op2), .op2(op1), .opcode(opcode), .result(result));
    

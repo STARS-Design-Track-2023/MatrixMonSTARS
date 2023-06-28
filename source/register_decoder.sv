@@ -5,8 +5,8 @@ module register_decoder(
     output logic [2:0] reg_num
 );
 
-logic reg_async, reg_sync, reg_i;
-logic [1:0] next_reg_num;
+logic [3:0] reg_async, reg_sync, reg_i;
+logic [2:0] next_reg_num;
 always_ff @(posedge clk, negedge nrst) begin
     if(nrst == 0) begin
         reg_async <= 0;
@@ -38,6 +38,7 @@ always_comb begin
             4'b0010: next_reg_num = 3'b010;
             4'b0100: next_reg_num = 3'b011;
             4'b1000: next_reg_num = 3'b100;
+            default: next_reg_num = 3'b000;
         endcase
     end
     else begin

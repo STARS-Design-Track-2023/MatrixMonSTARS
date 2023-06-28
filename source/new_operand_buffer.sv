@@ -1,7 +1,7 @@
 module new_operand_buffer(
     input logic clk, nrst,
     input logic [8:0] result,
-    input logic store_digit, enter, result_ready,
+    input logic store_digit, is_reg, result_ready,
     input logic [3:0] digit,
     output logic [8:0] op1,
     output logic sign,
@@ -30,14 +30,14 @@ module new_operand_buffer(
         next_op1 = op1;
         if(store_digit)
             next_op1 = {1'b0, op1[3:0], digit};
-        else if (enter)
+        else if (is_reg)
             next_op1 = 0;
     end
 
   always_comb begin
     if(store_digit)
         next_ssdec = next_op1[7:0];
-    else if (enter)
+    else if (is_reg)
         next_ssdec = 0;
     else if (result_ready)
         next_ssdec = result[7:0];

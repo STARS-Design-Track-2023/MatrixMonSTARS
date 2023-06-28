@@ -17,6 +17,7 @@ module alu (
     new_op1 = op1;
     new_op2 = op2;
 
+
         //9's complement conditional
         if (opcode == 3'b010)  begin 
           new_op2[8] = ~op2[8]; //flip most sig bit to indicate sign

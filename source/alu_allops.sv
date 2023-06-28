@@ -1,6 +1,7 @@
 module alu (
     input logic [8:0] op1, op2,
     input logic [2:0] opcode,
+    input logic alu_en,
     output logic [8:0] result
 );
     logic [3:0] int_sum_lsd, int_sum_msd;
@@ -19,6 +20,8 @@ module alu (
     always_comb begin : ALUCOMPUTATION
     new_op1 = op1;
     new_op2 = op2;
+
+    if (alu_en ==1) begin
 
         //9's complement conditional for subtraction
         if (opcode == 3'b010)  begin 
@@ -96,6 +99,7 @@ module alu (
           {1'b0, result[3:0]} = b_result % 10;
           result[8] = op1[8] ^ op2[8];
         end
+    end
   
 end
 endmodule

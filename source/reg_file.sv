@@ -44,5 +44,3 @@ module reg_file
         endcase
     end
     endmodule
-
-

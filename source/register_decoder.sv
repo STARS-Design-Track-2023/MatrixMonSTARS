@@ -36,23 +36,18 @@ always_comb begin
         case(reg_sync)
             4'b0001: begin
                 next_reg_num = 3'b001;
-                // is_reg = 1;
             end
             4'b0010: begin 
                 next_reg_num = 3'b010;
-                // is_reg = 1;
             end
             4'b0100: begin
                 next_reg_num = 3'b011;
-                // is_reg = 1;
             end
             4'b1000: begin 
                 next_reg_num = 3'b100;
-                // is_reg = 1;
             end
             default: begin 
                 next_reg_num = 3'd0;
-                // is_reg = 0;
             end
         endcase
     end

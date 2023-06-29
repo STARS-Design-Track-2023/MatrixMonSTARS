@@ -1,34 +1,25 @@
-`default_nettype none
-
-module top 
+module calculator 
 (
   // I/O ports
-  input  logic hz100, reset,
-  input  logic [20:0] pb,
-  output logic [7:0] left, right,
-         ss7, ss6, ss5, ss4, ss3, ss2, ss1, ss0,
-  output logic red, green, blue,
-
-  // UART ports
-  output logic [7:0] txdata,
-  input  logic [7:0] rxdata,
-  output logic txclk, rxclk,
-  input  logic txready, rxready
+  input  logic        clk, nrst,
+  input  logic [9:0]  pb,
+  output logic [13:0] ss,
+  output logic        red, blue
 );
-  logic isdig, isop, is_enter, is_result, store_dig, result_ready, is_reg, alu_en, assign_op1, assign_op2, enter, write;
-  logic [2:0] opcode;
-  logic [8:0] op, digit_con; 
-  logic sign, o_flag;
-  logic [8:0] result, digit;
-  logic [7:0] seg;
-  logic [2:0] reg_num, reg_sel;
-  logic [8:0] reg_val;
-  
 
- keyencoder_binary u1(
+    logic isdig, isop, is_enter, is_result, store_dig, result_ready, is_reg, alu_en, assign_op1, assign_op2, enter, write;
+    logic [2:0] opcode;
+    logic [8:0] op, digit_con; 
+    logic sign, o_flag;
+    logic [8:0] result, digit;
+    logic [7:0] seg;
+    logic [2:0] reg_num, reg_sel;
+    logic [8:0] reg_val;
 
-    .clk(hz100), 
-    .nrst(~reset), 
+    keyencoder_binary u1(
+
+    .clk(clk), 
+    .nrst(nrst), 
     .is_op(isop), 
     .keypad(pb[1:0]),
     .is_result(is_result), 
@@ -49,8 +40,8 @@ module top
 
  opcode_encoder u3(
   
-    .clk(hz100), 
-    .nrst(~reset), 
+    .clk(clk), 
+    .nrst(nrst), 
     .in(pb[11:10]), 
     .out(opcode), 
     .is_op(isop), 
@@ -59,8 +50,8 @@ module top
   );
 
  new_operand_buffer u4(
-    .clk(hz100), 
-    .nrst(~reset), 
+    .clk(clk), 
+    .nrst(nrst), 
     .sign1(sign), 
     .o_flag1(o_flag),
     .store_digit(store_dig), 
@@ -77,16 +68,16 @@ module top
 
  register_decoder u6(
   
-    .clk(hz100), 
-    .nrst(~reset), 
+    .clk(clk), 
+    .nrst(nrst), 
     .register_button(pb[19:16]), 
     .is_reg(is_reg), 
     .reg_num(reg_num)
   );
 
  reg_file u5(
-    .clk(hz100), 
-    .nrst(~reset), 
+    .clk(clk), 
+    .nrst(nrst), 
     .reg_num(reg_num), 
     .reg_sel(reg_sel), 
     .op(op), 
@@ -95,8 +86,8 @@ module top
   );
 
  read_fsm u7(
-    .clk(hz100), 
-    .nrst(~reset), 
+    .clk(clk), 
+    .nrst(nrst), 
     .r_en(pb[3]), 
     .reg_num(reg_num), 
     .opcode(opcode), 
@@ -108,8 +99,8 @@ module top
   );
 
  alu u8(
-    .clk(hz100), 
-    .nrst(~reset), 
+    .clk(clk), 
+    .nrst(nrst), 
     .op(reg_val), 
     .opcode(opcode), 
     .alu_en(alu_en), 
@@ -122,7 +113,7 @@ module top
 
  ssdec u9(
     .result({1'b0,seg}),
-    .segments({ss1[6:0], ss0[6:0]})
+    .segments(ss)
   );
 
 endmodule

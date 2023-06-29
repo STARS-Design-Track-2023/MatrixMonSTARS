@@ -1,9 +1,6 @@
-
-//topfile implementation: 
-
 module opcode_encoder(
   input logic clk, nrst,
-  input logic [2:0] in,
+  input logic [1:0] in,
   output [2:0] out,
   output logic is_op, is_result, is_enter
 );
@@ -23,15 +20,6 @@ always_ff @(posedge clk, negedge nrst) begin
     end
 end
 
-// always_comb begin
-//   if((|keypad_sync) && ~(|keypad_13)) begin
-//             keystrobe = 1;
-//         end
-//         else begin
-//             keystrobe = 0;
-//         end
-//   end
-
 always_comb begin : OpcodeCombinationalLogic
     out = 0;
     is_op = 0;
@@ -39,13 +27,13 @@ always_comb begin : OpcodeCombinationalLogic
     is_enter = 0;
     // if(keystrobe)
         case(keypad_sync)
-        3'b001: begin // added
+        2'b01: begin // added
                 out = 3'b001;
                 is_op = 1;
                 is_result = 1;
                 is_enter = 0;
                 end 
-        3'b010: begin //substracted
+        2'b10: begin //substracted
                 out = 3'b010;
                 is_op = 1;
                 is_result = 1;
@@ -53,12 +41,6 @@ always_comb begin : OpcodeCombinationalLogic
                 end 
 
         endcase
-    // else begin
-    //     out = 3'b000;
-    //     is_op = 0;
-    //     is_result = 0;
-    //     is_enter = 0;
     end
-
 endmodule
     

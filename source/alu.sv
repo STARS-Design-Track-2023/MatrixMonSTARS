@@ -5,7 +5,7 @@ module alu (
     input logic alu_en,
     input logic assign_op1, assign_op2,
     output logic [8:0] result,
-    output logic [7:0] res1, res2
+    output logic o_flag, sign
 );
     logic [3:0] int_sum_lsd, int_sum_msd;
     logic int_lsd_c, int_msd_c;
@@ -19,7 +19,6 @@ module alu (
     logic first_convert_carry, max_logic_convert, final_logic_convert, final_convert_carry, convert_c_out;
 
     logic [8:0] next_op1, next_op2;
-    logic [2:0] next_opcode;
     logic [8:0] op1, op2;
     logic [2:0] next_buff_opcode, buff_opcode;
     logic       b_assign_op1, b_assign_op2, n_b_assign_op1, n_b_assign_op2;
@@ -63,12 +62,14 @@ module alu (
     new_op2 = op2;
     
 
-    {int_sum_lsd, int_sum_msd, int_lsd_c, int_msd_c, final_logic_lsd, final_logic_msd, carry_lsd, carry_msd, carry_convert, max_logic_lsd, max_logic_msd, new_op1, new_op2, LSD_c_out, MSD_final_c_out, LSD_final_c_out, MSD_c_out, new_result, first_convert_carry, max_logic_convert, final_logic_convert, final_convert_carry, convert_c_out, next_opcode} = 0;
+    {int_sum_lsd, int_sum_msd, int_lsd_c, int_msd_c, final_logic_lsd, final_logic_msd,
+    carry_lsd, carry_msd, carry_convert, max_logic_lsd, max_logic_msd, LSD_c_out, 
+    MSD_final_c_out, LSD_final_c_out, MSD_c_out, 
+    new_result, first_convert_carry, max_logic_convert, 
+    final_logic_convert, final_convert_carry, convert_c_out, o_flag, sign} = 0;
 
     result = new_result;
-    
     if (alu_en) begin
-
         //9's complement conditional
         if (buff_opcode == 3'b010)  begin 
           new_op2[8] = ~op2[8]; //flip most sig bit to indicate sign
@@ -108,8 +109,14 @@ module alu (
         convert_c_out = 0;
         final_convert_carry = 0;
         final_logic_convert = 0;
-        
-        if (result[8] == 1) begin
+        sign = result[8];
+        o_flag = ((new_op2[8] && new_op1[8] && ~result[8]) || (~new_op2[8] && ~new_op1[8] && result[8])); 
+        sign = result[8];
+        if (o_flag == 1) begin
+        o_flag = 1;
+        sign = 0;
+        end
+        else if (result[8] == 1) begin
             new_result[3:0] = 4'b1001 - new_result[3:0] + 1; //9's comp
             max_logic_convert = (new_result[3] && new_result[2]) || (new_result[3] && new_result[1]);
             final_logic_convert = max_logic_convert;
@@ -121,9 +128,9 @@ module alu (
         end
 
         if (result == 9'b000011001 && new_op2 == 9'b000010000 && new_op1 == 9'b000001001)
-            result = 9'b00100001;
+            new_result = 9'b00100001;
+        result = new_result;
 
-    end
+end
 end
 endmodule
-

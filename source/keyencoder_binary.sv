@@ -1,8 +1,3 @@
-
-
-
-//topfile instatiation: keyencoder_binary u1(.clk(hwclk), nrst(reset), .keypad(pb[1:0]), .is_op(isop), .is_result(is_result), .is_enter(is_enter), .w_en(pb[2]));
-
 module keyencoder_binary(
     input logic clk, nrst, is_op, is_result, is_enter, w_en, r_en, 
     input logic [1:0] keypad,
@@ -169,10 +164,7 @@ module keyencoder_binary(
     //Shift register logic. It shifts each input to create the code
     always_comb begin
         partial_code = keycode;
-        if(state == s0) begin
-            partial_code = 0;
-        end
-        else if(use_code && strobe && (state != s10 || state != s11 || state != s12)) begin
+        if(use_code && strobe && (state != s10 || state != s11 || state != s12)) begin
             partial_code = {keycode[7:0], code_choice};
     end
     end

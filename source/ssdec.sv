@@ -1,8 +1,6 @@
 module ssdec(
 input logic [8:0] result,
-input logic sign,
-output logic [13:0] segments,
-output logic negsign
+output logic [13:0] segments
 );
 
 logic [3:0] lsd, msd;
@@ -66,16 +64,5 @@ always_comb
       end
     endcase
   end
-
-
-  // always_comb 
-  // begin
-  //   if (result[8] == 1'b1)
-  //     negsign = 1;
-  //   else
-  //   negsign = 0;
-  // end
-
-  assign negsign = sign;
 
 endmodule

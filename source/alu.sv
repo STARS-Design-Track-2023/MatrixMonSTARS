@@ -4,8 +4,8 @@ module alu (
     input logic [2:0] opcode,
     input logic alu_en,
     input logic assign_op1, assign_op2,
-    output logic [8:0] result
-
+    output logic [8:0] result,
+    output logic [7:0] res1, res2
 );
     logic [3:0] int_sum_lsd, int_sum_msd;
     logic int_lsd_c, int_msd_c;
@@ -23,34 +23,33 @@ module alu (
     logic [8:0] op1, op2;
     logic [2:0] next_buff_opcode, buff_opcode;
 
+    assign next_buff_opcode = opcode;
+    assign res1 = op1[7:0];
+    assign res2 = op2[7:0];
+
     always_ff @( posedge clk, negedge nrst) begin : hold
         if (nrst == 0) begin
-            op1 <= '0;
-            op2 <= '0;
+            op1 <= 0;
+            op2 <= 0;
             buff_opcode <= 3'b0;
         end
         else begin
-            if (assign_op1) begin
-            next_op1 <= op;
-        end
-        else if (assign_op2) begin
-            next_op2 <= op;
-        end
-            // op1 <= next_op1;
-            // op2 <= next_op2;
+            op1 <= next_op1;
+            op2 <= next_op2;
             buff_opcode <= next_buff_opcode;
         end
     end
 
-    // always_comb begin : FFassign_values
-    //     if (assign_op1) begin
-    //         next_op1 = op;
-    //     end
-    //     else if (assign_op2) begin
-    //         next_op2 = op;
-    //     end
-
-    // end
+    always_comb begin : FFassign_values
+        next_op1 = op1;
+        next_op2 = op2;
+        if (assign_op1) begin
+            next_op1 = op;
+        end
+        else if (assign_op2) begin
+            next_op2 = op;
+        end
+    end
 
     always_comb begin : ALUCOMPUTATION
     new_op1 = op1;
@@ -120,5 +119,4 @@ module alu (
     end
 end
 endmodule
-
 

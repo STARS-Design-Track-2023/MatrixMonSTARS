@@ -19,7 +19,7 @@ TOP_FILE         :=
 
 # List internal component/block files here (separate the filenames with spaces)
 # NOTE: YOU WILL NEED TO SET THIS VARIABLE'S VALUE WHEN WORKING WITH HEIRARCHICAL DESIGNS
-COMPONENT_FILES  := key_encoder.sv digit_decoder.sv opcode_decoder.sv fsm.sv register_decoder.sv new_operand_buffer.sv read_fsm.sv reg_file.sv alu.sv ssdec.sv 
+COMPONENT_FILES  := keyencoder_binary.sv neg_input.sv opcode_encoder.sv new_operand_buffer.sv register_decoder.sv reg_file.sv read_fsm.sv alu.sv ssdec.sv
 #COMPONENT_FILES := 
 # Specify the filepath of the test bench you want to use (ie. tb_top_level.sv)
 # (do not include the source folder in the name)

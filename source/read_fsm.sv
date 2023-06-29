@@ -3,7 +3,8 @@ module read_fsm(
     input logic [2:0] reg_num, opcode,
     output logic [2:0] reg_sel, 
     output logic alu_en,
-    output logic assign_op1, assign_op2
+    output logic assign_op1, assign_op2,
+    output logic result_ready
 );
 
     typedef enum logic [2:0] {IDLE, EN, REG1, IDLE2, REG2, IDLE3, RESULT } state_t;
@@ -14,12 +15,8 @@ module read_fsm(
     always_ff @(posedge clk, negedge nrst) begin
         if (~nrst) begin
             state <= IDLE;
-           
-            
         end else begin
             state <= next_state;
-          
-            
         end
     end
 
@@ -40,20 +37,32 @@ module read_fsm(
     // Output Logic
     always_comb begin
         alu_en = 1'b0;
-        reg_sel = 3'b0;
+        // reg_sel = 3'b0;
         assign_op1 = 1'b0;
         assign_op2 = 1'b0;
+        result_ready = 1'b0;
         case (state)
             REG1: begin
-                  reg_sel = reg_num;
+                //   reg_sel = reg_num;
                   assign_op1 = 1'b1;
                   end
             REG2: begin
-                  reg_sel = reg_num;
+                //   reg_sel = reg_num;
                   assign_op2 = 1'b1;
                   end
 
-            RESULT : alu_en = 1'b1;
+            RESULT : begin
+                     alu_en = 1'b1;
+                     result_ready = 1'b1;
+                     end
+        endcase
+    end
+
+    always_comb begin
+        reg_sel = 3'b0;
+        case (next_state)
+        REG1: reg_sel = reg_num;
+        REG2: reg_sel = reg_num;
         endcase
     end
 

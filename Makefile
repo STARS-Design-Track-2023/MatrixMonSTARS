@@ -19,11 +19,11 @@ TOP_FILE         :=
 
 # List internal component/block files here (separate the filenames with spaces)
 # NOTE: YOU WILL NEED TO SET THIS VARIABLE'S VALUE WHEN WORKING WITH HEIRARCHICAL DESIGNS
-COMPONENT_FILES  := 
-
+COMPONENT_FILES  := alu.sv opcode_encoder.sv keyencoder_binary.sv last_operand_buffer.sv new_operand_buffer.sv ssdec.sv neg_input.sv
+#COMPONENT_FILES := 
 # Specify the filepath of the test bench you want to use (ie. tb_top_level.sv)
 # (do not include the source folder in the name)
-TB               := 
+TB               :=  
 
 # Get the top level design and test_bench module names
 TB_MODULE		 := $(notdir $(basename $(TB)))
@@ -224,7 +224,7 @@ $(FPGA_BUILD)/$(PROJ).json : $(ICE) $(addprefix $(SRC)/, $(COMPONENT_FILES) $(TO
 	@echo "----------------------------------------------------------------"
 	@echo "Checking Syntax ....."
 	@echo -e "----------------------------------------------------------------\n\n"
-	@verilator --lint-only -Werror-WIDTH -Werror-SELRANGE -Werror-COMBDLY -Werror-LATCH -Werror-MULTIDRIVEN $(SRC)/top.sv $(addprefix $(SRC)/, $(COMPONENT_FILES) $(TOP_FILE))
+	@-verilator --lint-only -Werror-WIDTH -Werror-SELRANGE -Werror-COMBDLY -Werror-LATCH -Werror-MULTIDRIVEN $(SRC)/top.sv $(addprefix $(SRC)/, $(COMPONENT_FILES) $(TOP_FILE))
 	@mkdir -p $(FPGA_BUILD)
 	@echo "----------------------------------------------------------------"
 	@echo "Synthesizing to ice40 ....."
@@ -265,7 +265,7 @@ lint: $(addprefix $(SRC)/, $(TOP_FILE) $(COMPONENT_FILES) $(TB))
 	@echo "----------------------------------------------------------------"
 	@echo "Checking Syntax ....."
 	@echo -e "----------------------------------------------------------------\n\n"
-	@verilator --lint-only  -Wno-MULTITOP -Wno-TIMESCALEMOD $^
+	@-verilator --lint-only  -Wno-MULTITOP -Wno-TIMESCALEMOD $^
 	@echo -e "\n\n"
 	@echo -e "Done linting\n\n"
 

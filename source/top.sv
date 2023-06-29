@@ -25,7 +25,7 @@ module top
   logic [7:0] seg;
 
   keyencoder_binary u1(.clk(hwclk), .nrst(~reset), .is_op(isop), .keypad(pb[1:0]),.is_result(is_result), .is_enter(is_enter), .store_dig(store_dig), .enter(enter), .result_ready(result_ready), .keycode(digit));
-  neg_input u10(.digit(hwclk), .digit_con(digit_con));
+  neg_input u10(.digit(digit), .digit_con(digit_con));
   opcode_encoder u2(.clk(hwclk), .nrst(~reset), .in(pb[12:10]), .out(opcode), .is_op(isop), .is_result(is_result), .is_enter(is_enter));  
   new_operand_buffer u5(.clk(hwclk), .nrst(~reset), .sign1(sign), .o_flag1(o_flag),.store_digit(store_dig), .enter(enter), .result_ready(result_ready), .digit(digit), .digit_con(digit_con),.op1(op1), .sign(blue), .o_flag(red),.result(result), .ssdec(seg));
 

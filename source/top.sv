@@ -31,7 +31,7 @@ module top
 
   last_operand_buffer u6(.clk(hwclk), .nrst(~reset), .enter(enter), .op1(op1), .op2(op2));
 
-  alu u7(.op1(op1), .op2(op2), .opcode(opcode), .result(result), .o_flag(o_flag), .sign(sign));
+  alu u7(.op1(op2), .op2(op1), .opcode(opcode), .result(result), .o_flag(o_flag), .sign(sign));
    
   ssdec u8(.result({1'b0,seg}),.segments({ss1[6:0], ss0[6:0]}));
 endmodule

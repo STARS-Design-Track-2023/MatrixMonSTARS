@@ -3,10 +3,10 @@
 module calculator 
 (
   // I/O ports
-  input  logic       clk, nrst,
-  input  logic [4:0] pb,
-  output logic [7:0] ss,
-  output logic       red, blue
+  input  logic        clk, nrst,
+  input  logic [4:0]  pb,
+  output logic [13:0] ss,
+  output logic        red, blue
 );
 
   // Intermediate Signals

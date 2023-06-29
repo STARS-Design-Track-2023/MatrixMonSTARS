@@ -1,6 +1,6 @@
 `default_nettype none
 
-module top 
+module calculator 
 (
   // I/O ports
   input  logic hwclk, reset,

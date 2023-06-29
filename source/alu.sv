@@ -22,31 +22,38 @@ module alu (
     logic [2:0] next_opcode;
     logic [8:0] op1, op2;
     logic [2:0] next_buff_opcode, buff_opcode;
+    logic       b_assign_op1, b_assign_op2, n_b_assign_op1, n_b_assign_op2;
 
     assign next_buff_opcode = opcode;
     assign res1 = op1[7:0];
     assign res2 = op2[7:0];
 
-    always_ff @( posedge clk, negedge nrst) begin : hold
+    always_ff @( posedge clk, negedge nrst) begin
         if (nrst == 0) begin
             op1 <= 0;
             op2 <= 0;
             buff_opcode <= 3'b0;
+            b_assign_op1 <= 0;
+            b_assign_op2 <= 0;
         end
         else begin
             op1 <= next_op1;
             op2 <= next_op2;
             buff_opcode <= next_buff_opcode;
+            b_assign_op1 <= n_b_assign_op1;
+            b_assign_op2 <= n_b_assign_op2;
         end
     end
 
     always_comb begin : FFassign_values
         next_op1 = op1;
         next_op2 = op2;
-        if (assign_op1) begin
+        n_b_assign_op1 = assign_op1;
+        n_b_assign_op2 = assign_op2;
+        if (b_assign_op1) begin
             next_op1 = op;
         end
-        else if (assign_op2) begin
+        if (b_assign_op2) begin
             next_op2 = op;
         end
     end
@@ -56,7 +63,7 @@ module alu (
     new_op2 = op2;
     
 
-    {next_op1, next_op2, int_sum_lsd, int_sum_msd, int_lsd_c, int_msd_c, final_logic_lsd, final_logic_msd, carry_lsd, carry_msd, carry_convert, max_logic_lsd, max_logic_msd, new_op1, new_op2, LSD_c_out, MSD_final_c_out, LSD_final_c_out, MSD_c_out, new_result, first_convert_carry, max_logic_convert, final_logic_convert, final_convert_carry, convert_c_out, next_op1, next_op2, next_opcode} = 0;
+    {int_sum_lsd, int_sum_msd, int_lsd_c, int_msd_c, final_logic_lsd, final_logic_msd, carry_lsd, carry_msd, carry_convert, max_logic_lsd, max_logic_msd, new_op1, new_op2, LSD_c_out, MSD_final_c_out, LSD_final_c_out, MSD_c_out, new_result, first_convert_carry, max_logic_convert, final_logic_convert, final_convert_carry, convert_c_out, next_opcode} = 0;
 
     result = new_result;
     

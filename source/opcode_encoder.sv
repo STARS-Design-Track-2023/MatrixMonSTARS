@@ -5,7 +5,7 @@ module opcode_encoder(
   output logic is_op, is_result, is_enter
 );
 
-logic [2:0] keypad_async, keypad_sync, keypad_13;
+logic [1:0] keypad_async, keypad_sync, keypad_13;
 //logic keystrobe;
 always_ff @(posedge clk, negedge nrst) begin
     if(0 == nrst) begin

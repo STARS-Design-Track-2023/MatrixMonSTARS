@@ -24,8 +24,6 @@ module alu (
     logic       b_assign_op1, b_assign_op2, n_b_assign_op1, n_b_assign_op2;
 
     assign next_buff_opcode = opcode;
-    assign res1 = op1[7:0];
-    assign res2 = op2[7:0];
 
     always_ff @( posedge clk, negedge nrst) begin
         if (nrst == 0) begin

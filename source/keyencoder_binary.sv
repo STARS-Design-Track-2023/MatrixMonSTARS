@@ -10,6 +10,7 @@ module keyencoder_binary(
     logic strobe,code_choice, use_code;
     logic [3:0] state, next_state;
     logic [8:0] partial_code;
+  
   typedef enum logic [3:0] {write, s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13} digit_state;
 
     // Flip Flops to syncronize, detect edge, and keep keycode
@@ -125,7 +126,6 @@ module keyencoder_binary(
             end
         endcase
     end 
-    
 
     always_comb begin
         if(state == s9) begin
@@ -166,7 +166,7 @@ module keyencoder_binary(
         partial_code = keycode;
         if(use_code && strobe && (state != s10 || state != s11 || state != s12)) begin
             partial_code = {keycode[7:0], code_choice};
-    end
+        end
     end
     // Assiges a value to the keycode
     always_comb begin

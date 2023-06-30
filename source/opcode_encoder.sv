@@ -1,9 +1,11 @@
+
 module opcode_encoder(
   input logic clk, nrst,
   input logic [1:0] in,
   output [2:0] out,
   output logic is_op, is_result, is_enter
 );
+
 
 logic [1:0] keypad_async, keypad_sync, keypad_13;
 //logic keystrobe;

@@ -17,7 +17,6 @@ module calculator
     logic [8:0] reg_val;
 
     keyencoder_binary u1(
-
     .clk(clk), 
     .nrst(nrst), 
     .is_op(isop), 

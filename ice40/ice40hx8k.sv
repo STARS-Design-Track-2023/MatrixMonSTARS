@@ -110,7 +110,7 @@ module ice40hx8k (hwclk,pb,ss7,ss6,ss5,ss4,ss3,ss2,ss1,ss0,left,right,red,green,
     wire reset;
     reset_on_start ros (reset, hz100, pb[3] && pb[0] && pb[16]);
     top top_inst(
-      hz100, reset, pb,
+      hwclk, reset, pb,
       left, right, ss7, ss6, ss5, ss4, ss3, ss2, ss1, ss0,
       red, green, blue,
       txdata,

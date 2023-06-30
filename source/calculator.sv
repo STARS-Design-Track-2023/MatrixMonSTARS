@@ -1,56 +1,54 @@
-`default_nettype none
-
 module calculator 
 (
   // I/O ports
   input  logic        clk, nrst,
-  input  logic [4:0]  pb,
+  input  logic [9:0]  pb,
   output logic [13:0] ss,
   output logic        red, blue
 );
 
-  // Intermediate Signals
-  logic keystrobe1, isdig, isop, is_enter, is_result, store_dig, enter, result_ready;
-  logic [2:0] opcode;
-  logic [8:0] op1, digit_con; 
-  logic sign, o_flag;
-  logic [8:0] op2;
-  logic [8:0] result, digit;
-  logic [7:0] seg;
+    logic isdig, isop, is_enter, is_result, store_dig, result_ready, is_reg, alu_en, assign_op1, assign_op2, enter, write;
+    logic [2:0] opcode;
+    logic [8:0] op, digit_con; 
+    logic sign, o_flag;
+    logic [8:0] result, digit;
+    logic [7:0] seg;
+    logic [2:0] reg_num, reg_sel;
+    logic [8:0] reg_val;
 
-  keyencoder_binary u1
-  (
+    keyencoder_binary u1(
     .clk(clk), 
     .nrst(nrst), 
     .is_op(isop), 
     .keypad(pb[1:0]),
     .is_result(is_result), 
-    .is_enter(is_enter), 
+    .is_enter(is_reg), 
     .store_dig(store_dig), 
     .enter(enter), 
-    .result_ready(result_ready), 
-    .keycode(digit)
-  );
+    .write_en(write),
+    .keycode(digit), 
+    .r_en(pb[3]), 
+    .w_en(pb[2])
 
-  neg_input u10 
-  (
+);
+
+ neg_input u2(
     .digit(digit), 
     .digit_con(digit_con)
-  );
+);
 
-  opcode_encoder u2
-  (
+ opcode_encoder u3(
+  
     .clk(clk), 
     .nrst(nrst), 
-    .in(pb[12:10]), 
+    .in(pb[5:4]), 
     .out(opcode), 
     .is_op(isop), 
     .is_result(is_result), 
     .is_enter(is_enter)
-  );  
+  );
 
-  new_operand_buffer u5 
-  (
+ new_operand_buffer u4(
     .clk(clk), 
     .nrst(nrst), 
     .sign1(sign), 
@@ -60,33 +58,59 @@ module calculator
     .result_ready(result_ready), 
     .digit(digit), 
     .digit_con(digit_con),
-    .op1(op1), .sign(blue), 
+    .op1(op), 
+    .sign(blue), 
     .o_flag(red),
     .result(result), 
     .ssdec(seg)
   );
 
-  last_operand_buffer u6
-  (
+ register_decoder u6(
+  
     .clk(clk), 
     .nrst(nrst), 
-    .enter(enter), 
-    .op1(op1), 
-    .op2(op2)
+    .register_button(pb[9:6]), 
+    .is_reg(is_reg), 
+    .reg_num(reg_num)
   );
 
-  alu u7 
-  (
-    .op1(op2), 
-    .op2(op1), 
+ reg_file u5(
+    .clk(clk), 
+    .nrst(nrst), 
+    .reg_num(reg_num), 
+    .reg_sel(reg_sel), 
+    .op(op), 
+    .reg_val(reg_val), 
+    .write(write)
+  );
+
+ read_fsm u7(
+    .clk(clk), 
+    .nrst(nrst), 
+    .r_en(pb[3]), 
+    .reg_num(reg_num), 
     .opcode(opcode), 
+    .reg_sel(reg_sel), 
+    .alu_en(alu_en), 
+    .assign_op1(assign_op1),
+    .assign_op2(assign_op2), 
+    .result_ready(result_ready)
+  );
+
+ alu u8(
+    .clk(clk), 
+    .nrst(nrst), 
+    .op(reg_val), 
+    .opcode(opcode), 
+    .alu_en(alu_en), 
+    .assign_op1(assign_op1), 
+    .assign_op2(assign_op2), 
     .result(result), 
     .o_flag(o_flag), 
     .sign(sign)
   );
 
-  ssdec u8 
-  (
+ ssdec u9(
     .result({1'b0,seg}),
     .segments(ss)
   );

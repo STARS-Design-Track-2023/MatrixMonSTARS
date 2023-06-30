@@ -15,12 +15,13 @@ export LD_LIBRARY_PATH := /home/shay/a/ece270/lib:$(LD_LIBRARY_PATH)
 
 # Specify the name of the top level file (do not include the source folder in the name)
 # NOTE: YOU WILL NEED TO SET THIS VARIABLE'S VALUE WHEN WORKING WITH HEIRARCHICAL DESIGNS
-TOP_FILE         := 
+TOP_FILE         := calculator.sv
 
 # List internal component/block files here (separate the filenames with spaces)
 # NOTE: YOU WILL NEED TO SET THIS VARIABLE'S VALUE WHEN WORKING WITH HEIRARCHICAL DESIGNS
-COMPONENT_FILES  := alu.sv opcode_encoder.sv keyencoder_binary.sv last_operand_buffer.sv new_operand_buffer.sv ssdec.sv neg_input.sv
-#COMPONENT_FILES := 
+
+COMPONENT_FILES  := keyencoder_binary.sv neg_input.sv opcode_encoder.sv new_operand_buffer.sv register_decoder.sv reg_file.sv read_fsm.sv alu.sv ssdec.sv
+
 # Specify the filepath of the test bench you want to use (ie. tb_top_level.sv)
 # (do not include the source folder in the name)
 TB               :=  

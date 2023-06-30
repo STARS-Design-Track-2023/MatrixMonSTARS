@@ -1,8 +1,8 @@
 module keyencoder_binary(
-    input logic clk, nrst, is_op, is_result, is_enter, 
+    input logic clk, nrst, is_op, is_result, is_enter, w_en, r_en, 
     input logic [1:0] keypad,
     output logic [8:0] keycode,
-    output logic store_dig, enter, result_ready
+    output logic store_dig, enter, write_en
 );
 
     // Declare Internal Signals
@@ -10,7 +10,8 @@ module keyencoder_binary(
     logic strobe,code_choice, use_code;
     logic [3:0] state, next_state;
     logic [8:0] partial_code;
-    typedef enum logic [3:0] {s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13} digit_state;
+  
+  typedef enum logic [3:0] {write, s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13} digit_state;
 
     // Flip Flops to syncronize, detect edge, and keep keycode
     always_ff @(posedge clk, negedge nrst) begin
@@ -18,7 +19,7 @@ module keyencoder_binary(
             keypad_async <= 2'b0;
             keypad_sync  <= 2'b0;
             keypad_i     <= 2'b0;
-            state        <= s0;
+            state        <= write;
             keycode      <= 9'b0;
         end
         else begin
@@ -44,94 +45,84 @@ module keyencoder_binary(
     always_comb begin
         next_state = state;
         case(state)
+          write: begin
+                if (w_en) 
+                 next_state = s0;
+                 else 
+                 next_state = write;
+                end
             s0: begin
-                if(strobe) begin
+                if(strobe) 
                     next_state = s1;
-                end
-                else begin
+                else
                     next_state = s0;
-                end
             end
             s1: begin
-                if(strobe) begin
+                if(strobe)
                     next_state = s2;
-                end
-                else begin
+                else
                     next_state = s1;
-                end
             end
             s2: begin
-                if(strobe) begin
+                if(strobe)
                     next_state = s3;
-                end
-                else begin
+                else
                     next_state = s2;
-                end
             end
             s3: begin
-                if(strobe) begin
+                if(strobe)
                     next_state = s4;
-                end
-                else begin
+                else 
                     next_state = s3;
-                end
             end
             s4: begin
-                if(strobe) begin
+                if(strobe)
                     next_state = s5;
-                end
-                else begin
+                else 
                     next_state = s4;
-                end
             end
             s5: begin
-                if(strobe) begin
+                if(strobe)
                     next_state = s6;
-                end
-                else begin
+                else
                     next_state = s5;
-                end
             end
             s6: begin
-                if(strobe) begin
+                if(strobe)
                     next_state = s7;
-                end
-                else begin
+                else 
                     next_state = s6;
-                end
             end
             s7: begin
-                if(strobe) begin
+                if(strobe)
                     next_state = s8;
-                end
-                else begin
+                else
                     next_state = s7;
-                end
             end
             s8: begin
-                if(strobe) begin
+                if(strobe)
                     next_state = s9;
-                end
-                else begin
+                else
                     next_state = s8;
-                end
             end
             s9: next_state = s10;
             s10: begin
-            if(is_op && is_enter) begin
+              if(is_enter) // if true, this means that a register button has been enabled
                 next_state = s11;
-            end
-            else if (is_op && is_result) begin
+              else if(is_op && is_result) 
                 next_state = s12;
+              else
+                next_state = s10;
             end
-            else begin
-                next_state = state;
-            end
-            end
-            s11: next_state = s0;
-            s12: next_state = s0;
-            default: begin
-                next_state = state;
+            s11: next_state = s13; // num_enter state
+            s12: next_state = s13; // result_ready state 
+            s13: begin // checking if we are done registering numbers 
+              if (r_en)
+                next_state = write; // moves back to the protective write state
+              else if (strobe) // continues tp register more values
+                next_state = s1;
+              else // waiting for decision
+                next_state = s13;
             end
         endcase
     end 
@@ -140,24 +131,36 @@ module keyencoder_binary(
         if(state == s9) begin
             store_dig = 1;
             enter = 0;
-            result_ready = 0;
+            write_en = 0;
+
+            // result_ready = 0;
         end
         else if (state == s11) begin
             store_dig = 0;
             enter = 1;
-            result_ready = 0;
+            write_en = 1;
+
+            // result_ready = 0;
         end
         else if (state == s12) begin
+           store_dig = 0;
+           enter = 0;
+           write_en = 0;
+        //    result_ready = 1;
+        end
+        else if (state == s10) begin
             store_dig = 0;
             enter = 0;
-            result_ready = 1;
+            write_en = 0;
         end
         else begin
             store_dig = 0;
             enter = 0;
-            result_ready = 0;
+            write_en = 0;
+            // result_ready = 0;
         end
     end
+
     //Shift register logic. It shifts each input to create the code
     always_comb begin
         partial_code = keycode;

@@ -42,7 +42,7 @@ module calculator
   
     .clk(clk), 
     .nrst(nrst), 
-    .in(pb[11:10]), 
+    .in(pb[5:4]), 
     .out(opcode), 
     .is_op(isop), 
     .is_result(is_result), 
@@ -70,7 +70,7 @@ module calculator
   
     .clk(clk), 
     .nrst(nrst), 
-    .register_button(pb[19:16]), 
+    .register_button(pb[9:6]), 
     .is_reg(is_reg), 
     .reg_num(reg_num)
   );

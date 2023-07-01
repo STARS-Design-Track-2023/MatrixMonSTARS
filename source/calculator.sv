@@ -1,22 +1,21 @@
 module calculator 
 (
-  // I/O ports
   input  logic        clk, nrst,
   input  logic [9:0]  pb,
   output logic [13:0] ss,
   output logic        red, blue
 );
 
-    logic isdig, isop, is_enter, is_result, store_dig, result_ready, is_reg, alu_en, assign_op1, assign_op2, enter, write;
-    logic [2:0] opcode;
-    logic [8:0] op, digit_con; 
-    logic sign, o_flag;
-    logic [8:0] result, digit;
-    logic [7:0] seg;
-    logic [2:0] reg_num, reg_sel;
-    logic [8:0] reg_val;
+  // Intermediate Signals
+  logic       isdig, isop, is_enter, is_result, store_dig, result_ready, is_reg;
+  logic       sign, o_flag, alu_en, assign_op1, assign_op2, enter, write;
+  logic [2:0] opcode, reg_num, reg_sel;
+  logic [7:0] seg;
+  logic [8:0] op, digit_con, result, digit, reg_val;
 
-    keyencoder_binary u1(
+  // Module Instanciations and Connections
+  keyencoder_binary u1
+  (
     .clk(clk), 
     .nrst(nrst), 
     .is_op(isop), 
@@ -29,16 +28,16 @@ module calculator
     .keycode(digit), 
     .r_en(pb[3]), 
     .w_en(pb[2])
+  );
 
-);
-
- neg_input u2(
+  neg_input u2
+  (
     .digit(digit), 
     .digit_con(digit_con)
-);
+  );
 
- opcode_encoder u3(
-  
+  opcode_encoder u3
+  (
     .clk(clk), 
     .nrst(nrst), 
     .in(pb[5:4]), 
@@ -48,7 +47,8 @@ module calculator
     .is_enter(is_enter)
   );
 
- new_operand_buffer u4(
+  new_operand_buffer u4
+  (
     .clk(clk), 
     .nrst(nrst), 
     .sign1(sign), 
@@ -65,8 +65,8 @@ module calculator
     .ssdec(seg)
   );
 
- register_decoder u6(
-  
+  register_decoder u6
+  ( 
     .clk(clk), 
     .nrst(nrst), 
     .register_button(pb[9:6]), 
@@ -74,7 +74,8 @@ module calculator
     .reg_num(reg_num)
   );
 
- reg_file u5(
+  reg_file u5
+  (
     .clk(clk), 
     .nrst(nrst), 
     .reg_num(reg_num), 
@@ -84,7 +85,8 @@ module calculator
     .write(write)
   );
 
- read_fsm u7(
+  read_fsm u7
+  (
     .clk(clk), 
     .nrst(nrst), 
     .r_en(pb[3]), 
@@ -97,7 +99,8 @@ module calculator
     .result_ready(result_ready)
   );
 
- alu u8(
+  alu u8
+  (
     .clk(clk), 
     .nrst(nrst), 
     .op(reg_val), 
@@ -110,7 +113,8 @@ module calculator
     .sign(sign)
   );
 
- ssdec u9(
+  ssdec u9
+  (
     .result({1'b0,seg}),
     .segments(ss)
   );

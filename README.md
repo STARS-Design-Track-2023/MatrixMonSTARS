@@ -25,13 +25,14 @@ Required Equipments:
   - Common cathode RGB LED: 1
   - Push buttons: 10
   - 10kΩ resistors: 10
-  - 150Ω resistor: 1
+  - 150Ω resistor: 16
   - Board by efabless: 1
   - Wires of various lengths
   - Breadboard: 3 (1 large and 2 Medium)
 
 Example Setup:
-![image](https://github.com/STARS-Design-Track-2023/MatrixMonSTARS/assets/126794890/361ad20a-6fd4-4596-89e2-ac6ac59c5097)
+
+![image](https://github.com/STARS-Design-Track-2023/MatrixMonSTARS/assets/126794890/027a793b-72ee-4299-9448-4f7d20148b9f)
 
 Push Button Labels:
 

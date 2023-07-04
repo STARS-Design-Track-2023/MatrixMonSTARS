@@ -28,7 +28,7 @@ Required Equipments:
   - 150Ω resistor: 16
   - Board by efabless: 1
   - Wires of various lengths
-  - Breadboard: 3 (1 large and 2 Medium)
+  - Breadboard: 5 (1 large, 1 Medium, and 2 Mini)
 
 Example Setup:
 

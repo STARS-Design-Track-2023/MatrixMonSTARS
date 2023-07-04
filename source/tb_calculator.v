@@ -326,6 +326,6 @@ module tb_calculator ();
 
         check_output();
 
-        $stop;
+        $finish;
     end
 endmodule

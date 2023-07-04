@@ -1,4 +1,5 @@
-module keyencoder_binary(
+module keyencoder_binary
+(
     input logic clk, nrst, is_op, is_result, is_enter, w_en, r_en, 
     input logic [1:0] keypad,
     output logic [8:0] keycode,
@@ -7,7 +8,7 @@ module keyencoder_binary(
 
     // Declare Internal Signals
     logic [1:0] keypad_async, keypad_sync, keypad_i; 
-    logic strobe,code_choice, use_code;
+    logic strobe,code_choice, use_code, p_w_en, p_r_en;
     logic [3:0] state, next_state;
     logic [8:0] partial_code;
   
@@ -31,6 +32,24 @@ module keyencoder_binary(
     end
     end
 
+    // Edge detection for the write
+    sync_edge_detector s_e_detect_w
+    (
+        .clk(clk),
+        .nrst(nrst),
+        .signal(w_en),
+        .p_edge(p_w_en)
+    );
+
+    // Edge detection for the read
+    sync_edge_detector s_e_detect_r
+    (
+        .clk(clk),
+        .nrst(nrst),
+        .signal(r_en),
+        .p_edge(p_r_en)
+    );
+
     // Edge detector logic. This detects a rising edge
     always_comb begin
         if((|keypad_sync) && ~(|keypad_i)) begin
@@ -46,7 +65,7 @@ module keyencoder_binary(
         next_state = state;
         case(state)
           write: begin
-                if (w_en) 
+                if (p_w_en) 
                  next_state = s0;
                  else 
                  next_state = write;

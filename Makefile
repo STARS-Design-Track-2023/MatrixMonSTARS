@@ -4,8 +4,8 @@
 # Set tab spacing to 2 spaces per tab for best viewing results
 ###########################################################################################
 
-export PATH            := /home/shay/a/ece270/bin:$(PATH)
-export LD_LIBRARY_PATH := /home/shay/a/ece270/lib:$(LD_LIBRARY_PATH)
+# export PATH            := /home/shay/a/ece270/bin:$(PATH)
+# export LD_LIBRARY_PATH := /home/shay/a/ece270/lib:$(LD_LIBRARY_PATH)
 
 ##############################################################################
 # VARIABLES
@@ -20,11 +20,11 @@ TOP_FILE         := calculator.sv
 # List internal component/block files here (separate the filenames with spaces)
 # NOTE: YOU WILL NEED TO SET THIS VARIABLE'S VALUE WHEN WORKING WITH HEIRARCHICAL DESIGNS
 
-COMPONENT_FILES  := keyencoder_binary.sv neg_input.sv opcode_encoder.sv new_operand_buffer.sv register_decoder.sv reg_file.sv read_fsm.sv alu.sv ssdec.sv
+COMPONENT_FILES  := keyencoder_binary.sv neg_input.sv opcode_encoder.sv new_operand_buffer.sv register_decoder.sv reg_file.sv read_fsm.sv alu.sv ssdec.sv sync_edge_detector.sv
 
 # Specify the filepath of the test bench you want to use (ie. tb_top_level.sv)
 # (do not include the source folder in the name)
-TB               :=  
+TB               := tb_calculator.v
 
 # Get the top level design and test_bench module names
 TB_MODULE		 := $(notdir $(basename $(TB)))
@@ -152,7 +152,7 @@ clean:
 	@rm -f *.log
 	@rm -f *.vcd
 	@rm -rf $(PROJ)/build
-	@rm -f xt
+	@rm -f *.stran
 	@echo -e "Done\n\n"
 
 print_vars:
@@ -205,6 +205,7 @@ $(SIM_SOURCE): $(SRC)
 	@echo "Simulating source ....."
 	@echo -e "----------------------------------------------------------------\n\n"
 	@vvp -lxt -s $(BUILD)/$@.vvp
+	@mv xt transcript_source.stran
 	@echo -e "\n\n"
 
 # This rule defines how to simulate the mapped form of the full design
@@ -213,6 +214,7 @@ $(SIM_MAPPED): $(MAP)
 	@echo "Simulating mapped ....."
 	@echo -e "----------------------------------------------------------------\n\n"
 	@vvp -lxt -s $(BUILD)/$@.vvp
+	@mv xt transcript_source.stran
 	@echo -e "\n\n"
 
 
@@ -271,7 +273,7 @@ lint: $(addprefix $(SRC)/, $(TOP_FILE) $(COMPONENT_FILES) $(TB))
 	@echo -e "Done linting\n\n"
 
 # Rule to look at the waveforms with gtkwave
-verify: $(DUMP).vcd
+verify: $(TOP_MODULE)_$(DUMP).vcd
 ifeq ($(WF), 0)
 	@gtkwave $^
 else

@@ -2,7 +2,7 @@
 module opcode_encoder(
   input logic clk, nrst,
   input logic [1:0] in,
-  output [2:0] out,
+  output logic [2:0] out,
   output logic is_op, is_result, is_enter
 );
 
@@ -23,10 +23,10 @@ always_ff @(posedge clk, negedge nrst) begin
 end
 
 always_comb begin : OpcodeCombinationalLogic
-    out = 0;
-    is_op = 0;
-    is_result = 0;
-    is_enter = 0;
+    out = 'b0;
+    is_op = 'b0;
+    is_result = 'b0;
+    is_enter = 'b0;
     // if(keystrobe)
         case(keypad_sync)
         2'b01: begin // added

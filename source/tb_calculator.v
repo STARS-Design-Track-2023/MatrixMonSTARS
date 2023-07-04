@@ -34,7 +34,7 @@ module tb_calculator ();
 
     // Values for testing the seven segment displays
     // These values here are verified through an FPGA test
-    reg [6:0] SEG7 [9:0];
+    wire [6:0] SEG7 [9:0];
     assign SEG7[4'h0] = 7'b0111111;
     assign SEG7[4'h1] = 7'b0000110;
     assign SEG7[4'h2] = 7'b1011011;

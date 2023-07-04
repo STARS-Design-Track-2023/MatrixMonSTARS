@@ -177,6 +177,7 @@ module tb_calculator ();
         // Wait some time before starting first test case
         #(0.1);
 
+
         // ************************************************************************
         // Test Case 1: Power-on Reset of the DUT
         // ************************************************************************
@@ -212,7 +213,10 @@ module tb_calculator ();
         @(negedge tb_clk);
     
         check_output();
+
+        // Give some visual spacing between check and next test case start
         #(CLK_PERIOD * 3);
+
 
         // ************************************************************************
         // Test Case 2: Simple Addition
@@ -234,7 +238,7 @@ module tb_calculator ();
         send_pb (2);
 
         // Apply test case initial stimulus
-        // send in the first digit
+        // send in the first number
         send_pb (0);
         send_pb (0);
         send_pb (0);
@@ -251,7 +255,7 @@ module tb_calculator ();
         tb_expected_blue = RESET_OUTPUT_VALUE;
         tb_expected_red  = RESET_OUTPUT_VALUE;
 
-        // Check output after sending in the first digit
+        // Check output after sending in the first number
         // Wait for sometime before checking
         repeat (2) @(posedge tb_clk);
         @(negedge tb_clk);
@@ -264,7 +268,7 @@ module tb_calculator ();
          // Assign the expected values
         tb_expected_dig2 = RESET_OUTPUT_VALUE;
 
-        // Check output after storing in the first digit to a register
+        // Check output after storing in the first number to a register
         // Wait for sometime before checking
         repeat (2) @(posedge tb_clk);
         @(negedge tb_clk);
@@ -272,7 +276,7 @@ module tb_calculator ();
         check_output();
 
         // Apply test case initial stimulus
-        // send in the second digit
+        // send in the second number
         send_pb (0);
         send_pb (0);
         send_pb (0);
@@ -286,7 +290,7 @@ module tb_calculator ();
         // Assign the expected values
         tb_expected_dig2 = 4'h2;
 
-        // Check output after sending in the second digit
+        // Check output after sending in the second number
         // Wait for sometime before checking
         repeat (2) @(posedge tb_clk);
         @(negedge tb_clk);
@@ -299,7 +303,7 @@ module tb_calculator ();
          // Assign the expected values
         tb_expected_dig2 = RESET_OUTPUT_VALUE;
 
-        // Check output after storing in the second digit to a register
+        // Check output after storing in the second number to a register
         // Wait for sometime before checking
         repeat (2) @(posedge tb_clk);
         @(negedge tb_clk);
@@ -319,12 +323,740 @@ module tb_calculator ();
         // Assign the expected values
         tb_expected_dig2 = 4'h3;
 
-        // Check output after sending in the second digit
+        // Check output after sending in the opcode
         // Wait for sometime before checking
         repeat (2) @(posedge tb_clk);
         @(negedge tb_clk);
 
         check_output();
+
+        // Give some visual spacing between check and next test case start
+        #(CLK_PERIOD * 3);
+
+
+        // ************************************************************************
+        // Test Case 3: Double Digit Addition
+        // ************************************************************************
+        tb_test_num  = tb_test_num + 1;
+        tb_test_case = "Double Digit Addition";
+        
+        // Deactive any lingering inputs from previous test case
+        tb_pb = 'b0;
+
+        // reset the DUT
+        reset_dut();
+
+        // wait sometime before giving the stimulus
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        // select write mode
+        send_pb (2);
+
+        // Apply test case initial stimulus
+        // send in the first number
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+        send_pb (1);
+        send_pb (1);
+        send_pb (0);
+        send_pb (1);
+        send_pb (0);
+        send_pb (0);
+
+        // Assign the expected values
+        tb_expected_dig1 = 4'h3;
+        tb_expected_dig2 = 4'h4;
+        tb_expected_blue = RESET_OUTPUT_VALUE;
+        tb_expected_red  = RESET_OUTPUT_VALUE;
+
+        // Check output after sending in the first number
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // store the value in a register
+        send_pb (6);
+
+         // Assign the expected values
+        tb_expected_dig1 = RESET_OUTPUT_VALUE;
+        tb_expected_dig2 = RESET_OUTPUT_VALUE;
+
+        // Check output after storing in the first number to a register
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // Apply test case initial stimulus
+        // send in the second number
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+        send_pb (1);
+        send_pb (0);
+        send_pb (1);
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+
+        // Assign the expected values
+        tb_expected_dig1 = 4'h2;
+        tb_expected_dig2 = 4'h8;
+
+        // Check output after sending in the second number
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // store the value in a register
+        send_pb (7);
+
+         // Assign the expected values
+        tb_expected_dig1 = RESET_OUTPUT_VALUE;
+        tb_expected_dig2 = RESET_OUTPUT_VALUE;
+
+        // Check output after storing in the second number to a register
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // select right mode
+        send_pb (3);
+
+        // select the register we want to read from
+        send_pb (6);
+        send_pb (7);
+
+        // select the opcode
+        send_pb (4);
+
+        // Assign the expected values
+        tb_expected_dig1 = 4'h6;
+        tb_expected_dig2 = 4'h2;
+
+        // Check output after sending in the opcode
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // Give some visual spacing between check and next test case start
+        #(CLK_PERIOD * 3);
+
+
+        // ************************************************************************
+        // Test Case 4: Simple Subraction
+        // ************************************************************************
+        tb_test_num  = tb_test_num + 1;
+        tb_test_case = "Simple Subraction";
+        
+        // Deactive any lingering inputs from previous test case
+        tb_pb = 'b0;
+
+        // reset the DUT
+        reset_dut();
+
+        // wait sometime before giving the stimulus
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        // select write mode
+        send_pb (2);
+
+        // Apply test case initial stimulus
+        // send in the first number
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+        send_pb (1);
+        send_pb (0);
+        send_pb (0);
+
+        // Assign the expected values
+        tb_expected_dig1 = RESET_OUTPUT_VALUE;
+        tb_expected_dig2 = 4'h4;
+        tb_expected_blue = RESET_OUTPUT_VALUE;
+        tb_expected_red  = RESET_OUTPUT_VALUE;
+
+        // Check output after sending in the first number
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // store the value in a register
+        send_pb (6);
+
+         // Assign the expected values
+        tb_expected_dig2 = RESET_OUTPUT_VALUE;
+
+        // Check output after storing in the first number to a register
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // Apply test case initial stimulus
+        // send in the second number
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+        send_pb (1);
+
+        // Assign the expected values
+        tb_expected_dig2 = 4'h1;
+
+        // Check output after sending in the second number
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // store the value in a register
+        send_pb (7);
+
+         // Assign the expected values
+        tb_expected_dig2 = RESET_OUTPUT_VALUE;
+
+        // Check output after storing in the second number to a register
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // select right mode
+        send_pb (3);
+
+        // select the register we want to read from
+        send_pb (6);
+        send_pb (7);
+
+        // select the opcode
+        send_pb (5);
+
+        // Assign the expected values
+        tb_expected_dig2 = 4'h3;
+
+        // Check output after sending in the opcode
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // Give some visual spacing between check and next test case start
+        #(CLK_PERIOD * 3);
+
+
+        // ************************************************************************
+        // Test Case 5: Double Digit Subtraction
+        // ************************************************************************
+        tb_test_num  = tb_test_num + 1;
+        tb_test_case = "Double Digit Subtraction";
+        
+        // Deactive any lingering inputs from previous test case
+        tb_pb = 'b0;
+
+        // reset the DUT
+        reset_dut();
+
+        // wait sometime before giving the stimulus
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        // select write mode
+        send_pb (2);
+
+        // Apply test case initial stimulus
+        // send in the first number
+        send_pb (0);
+        send_pb (0);
+        send_pb (1);
+        send_pb (1);
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+        send_pb (1);
+        send_pb (1);
+
+        // Assign the expected values
+        tb_expected_dig1 = 4'h6;
+        tb_expected_dig2 = 4'h3;
+        tb_expected_blue = RESET_OUTPUT_VALUE;
+        tb_expected_red  = RESET_OUTPUT_VALUE;
+
+        // Check output after sending in the first number
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // store the value in a register
+        send_pb (8);
+
+        // Assign the expected values
+        tb_expected_dig1 = RESET_OUTPUT_VALUE;
+        tb_expected_dig2 = RESET_OUTPUT_VALUE;
+
+        // Check output after storing in the first number to a register
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // Apply test case initial stimulus
+        // send in the second number
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+        send_pb (1);
+        send_pb (0);
+        send_pb (1);
+        send_pb (0);
+        send_pb (1);
+
+        // Assign the expected values
+        tb_expected_dig1 = 4'h1;
+        tb_expected_dig2 = 4'h5;
+
+        // Check output after sending in the second number
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // store the value in a register
+        send_pb (9);
+
+        // Assign the expected values
+        tb_expected_dig1 = RESET_OUTPUT_VALUE;
+        tb_expected_dig2 = RESET_OUTPUT_VALUE;
+
+        // Check output after storing in the second number to a register
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // select right mode
+        send_pb (3);
+
+        // select the register we want to read from
+        send_pb (8);
+        send_pb (9);
+
+        // select the opcode
+        send_pb (5);
+
+        // Assign the expected values
+        tb_expected_dig1 = 4'h4;
+        tb_expected_dig2 = 4'h8;
+
+        // Check output after sending in the opcode
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // Give some visual spacing between check and next test case start
+        #(CLK_PERIOD * 3);
+
+
+        // ************************************************************************
+        // Test Case 6: Negative Output Subtraction
+        // ************************************************************************
+        tb_test_num  = tb_test_num + 1;
+        tb_test_case = "Negative Output Subtraction";
+        
+        // Deactive any lingering inputs from previous test case
+        tb_pb = 'b0;
+
+        // reset the DUT
+        reset_dut();
+
+        // wait sometime before giving the stimulus
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        // select write mode
+        send_pb (2);
+
+        // Apply test case initial stimulus
+        // send in the first number
+        send_pb (0);
+        send_pb (0);
+        send_pb (1);
+        send_pb (1);
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+        send_pb (1);
+        send_pb (1);
+
+        // Assign the expected values
+        tb_expected_dig1 = 4'h6;
+        tb_expected_dig2 = 4'h3;
+        tb_expected_blue = RESET_OUTPUT_VALUE;
+        tb_expected_red  = RESET_OUTPUT_VALUE;
+
+        // Check output after sending in the first number
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // store the value in a register
+        send_pb (8);
+
+        // Assign the expected values
+        tb_expected_dig1 = RESET_OUTPUT_VALUE;
+        tb_expected_dig2 = RESET_OUTPUT_VALUE;
+
+        // Check output after storing in the first number to a register
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // Apply test case initial stimulus
+        // send in the second number
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+        send_pb (1);
+        send_pb (0);
+        send_pb (1);
+        send_pb (0);
+        send_pb (1);
+
+        // Assign the expected values
+        tb_expected_dig1 = 4'h1;
+        tb_expected_dig2 = 4'h5;
+
+        // Check output after sending in the second number
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // store the value in a register
+        send_pb (9);
+
+        // Assign the expected values
+        tb_expected_dig1 = RESET_OUTPUT_VALUE;
+        tb_expected_dig2 = RESET_OUTPUT_VALUE;
+
+        // Check output after storing in the second number to a register
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // select right mode
+        send_pb (3);
+
+        // select the register we want to read from
+        send_pb (9);
+        send_pb (8);
+
+        // select the opcode
+        send_pb (5);
+
+        // Assign the expected values
+        tb_expected_dig1 = 4'h4;
+        tb_expected_dig2 = 4'h8;
+        tb_expected_blue = 1'd1;
+
+        // Check output after sending in the opcode
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // Give some visual spacing between check and next test case start
+        #(CLK_PERIOD * 3);
+
+
+        // ************************************************************************
+        // Test Case 7: Negative Input Addition
+        // ************************************************************************
+        tb_test_num  = tb_test_num + 1;
+        tb_test_case = "Negative Input Addition";
+        
+        // Deactive any lingering inputs from previous test case
+        tb_pb = 'b0;
+
+        // reset the DUT
+        reset_dut();
+
+        // wait sometime before giving the stimulus
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        // select write mode
+        send_pb (2);
+
+        // Apply test case initial stimulus
+        // send in the first number
+        send_pb (1);
+        send_pb (0);
+        send_pb (1);
+        send_pb (1);
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+        send_pb (1);
+        send_pb (1);
+
+        // Assign the expected values
+        tb_expected_dig1 = 4'h6;
+        tb_expected_dig2 = 4'h3;
+        tb_expected_blue = 1'b1;
+        tb_expected_red  = RESET_OUTPUT_VALUE;
+
+        // Check output after sending in the first number
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // store the value in a register
+        send_pb (8);
+
+        // Assign the expected values
+        tb_expected_dig1 = RESET_OUTPUT_VALUE;
+        tb_expected_dig2 = RESET_OUTPUT_VALUE;
+        tb_expected_blue = RESET_OUTPUT_VALUE;
+
+        // Check output after storing in the first number to a register
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // Apply test case initial stimulus
+        // send in the second number
+        send_pb (1);
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+        send_pb (1);
+        send_pb (0);
+        send_pb (1);
+        send_pb (0);
+        send_pb (1);
+
+        // Assign the expected values
+        tb_expected_dig1 = 4'h1;
+        tb_expected_dig2 = 4'h5;
+        tb_expected_blue = 1'b1;
+
+        // Check output after sending in the second number
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // store the value in a register
+        send_pb (9);
+
+        // Assign the expected values
+        tb_expected_dig1 = RESET_OUTPUT_VALUE;
+        tb_expected_dig2 = RESET_OUTPUT_VALUE;
+        tb_expected_blue = RESET_OUTPUT_VALUE;
+
+        // Check output after storing in the second number to a register
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // select right mode
+        send_pb (3);
+
+        // select the register we want to read from
+        send_pb (9);
+        send_pb (8);
+
+        // select the opcode
+        send_pb (4);
+
+        // Assign the expected values
+        tb_expected_dig1 = 4'h7;
+        tb_expected_dig2 = 4'h8;
+        tb_expected_blue = 1'd1;
+
+        // Check output after sending in the opcode
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // Give some visual spacing between check and next test case start
+        #(CLK_PERIOD * 3);
+
+
+        // ************************************************************************
+        // Test Case 8: Negative Input Subtraction
+        // ************************************************************************
+        tb_test_num  = tb_test_num + 1;
+        tb_test_case = "Negative Input Subtraction";
+        
+        // Deactive any lingering inputs from previous test case
+        tb_pb = 'b0;
+
+        // reset the DUT
+        reset_dut();
+
+        // wait sometime before giving the stimulus
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        // select write mode
+        send_pb (2);
+
+        // Apply test case initial stimulus
+        // send in the first number
+        send_pb (1);
+        send_pb (0);
+        send_pb (1);
+        send_pb (1);
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+        send_pb (1);
+        send_pb (1);
+
+        // Assign the expected values
+        tb_expected_dig1 = 4'h6;
+        tb_expected_dig2 = 4'h3;
+        tb_expected_blue = 1'b1;
+        tb_expected_red  = RESET_OUTPUT_VALUE;
+
+        // Check output after sending in the first number
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // store the value in a register
+        send_pb (8);
+
+        // Assign the expected values
+        tb_expected_dig1 = RESET_OUTPUT_VALUE;
+        tb_expected_dig2 = RESET_OUTPUT_VALUE;
+        tb_expected_blue = RESET_OUTPUT_VALUE;
+
+        // Check output after storing in the first number to a register
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // Apply test case initial stimulus
+        // send in the second number
+        send_pb (1);
+        send_pb (0);
+        send_pb (0);
+        send_pb (0);
+        send_pb (1);
+        send_pb (0);
+        send_pb (1);
+        send_pb (0);
+        send_pb (1);
+
+        // Assign the expected values
+        tb_expected_dig1 = 4'h1;
+        tb_expected_dig2 = 4'h5;
+        tb_expected_blue = 1'b1;
+
+        // Check output after sending in the second number
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // store the value in a register
+        send_pb (9);
+
+        // Assign the expected values
+        tb_expected_dig1 = RESET_OUTPUT_VALUE;
+        tb_expected_dig2 = RESET_OUTPUT_VALUE;
+        tb_expected_blue = RESET_OUTPUT_VALUE;
+
+        // Check output after storing in the second number to a register
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // select right mode
+        send_pb (3);
+
+        // select the register we want to read from
+        send_pb (8);
+        send_pb (9);
+
+        // select the opcode
+        send_pb (5);
+
+        // Assign the expected values
+        tb_expected_dig1 = 4'h4;
+        tb_expected_dig2 = 4'h8;
+        tb_expected_blue = 1'd1;
+
+        // Check output after sending in the opcode
+        // Wait for sometime before checking
+        repeat (2) @(posedge tb_clk);
+        @(negedge tb_clk);
+
+        check_output();
+
+        // Give some visual spacing between check and next test case start
+        #(CLK_PERIOD * 3);
 
         $finish;
     end

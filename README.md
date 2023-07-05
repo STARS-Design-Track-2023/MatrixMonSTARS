@@ -37,13 +37,12 @@ Example Setup:
 
 ![image](https://github.com/STARS-Design-Track-2023/MatrixMonSTARS/assets/126794890/027a793b-72ee-4299-9448-4f7d20148b9f)
 
-Push Button Labels:
 
-![image](https://github.com/STARS-Design-Track-2023/MatrixMonSTARS/assets/126794890/aca3b53a-e149-4a75-a73c-0ecd8e7d1a8f)
 ## RTL Diagrams
-All the stuff from the proposal goes here, obviously updated from the time you did the proposal to the final layout
-Include more than just block diagrams, including sub-block diagrams, state-transition diagrams, flowcharts, and timing diagrams
 
+<p align="center">
+  <img src="/docs/top_RTL.png" alt="Chip IO"/>
+</p>
 
 ## Some Legal Statement
 TBD

@@ -12,7 +12,7 @@ This calculator has the ability to add or subtract two two digit decimal numbers
 The numerical results are displayed on two seven segments displays and the sign and overflow flag
 are displayed using an RGB LED.
 
-The instructions to the calculater can be found [here](https://docs.google.com/document/d/1GANs3IZc4oy_pSsc378nTUj8dvBskMOKqrhrnbj51E0/edit?usp=sharing).
+The instructions to the calculater can be found [here](/docs/manual.pdf).
 
 ## Pin Layout
 Input/Ouput (IO) of Integrated Circuit (IC):

@@ -18,7 +18,7 @@ The instructions to the calculater can be found [here](https://docs.google.com/d
 Input/Ouput (IO) of Integrated Circuit (IC):
 
 <p align="center">
-  <img src="/docs/io.png" alt="Chip IO"/>
+  <img src="/img/io.png" alt="Chip IO"/>
 </p>
 
 ## Supporting Equipment
@@ -33,16 +33,15 @@ Required Equipments:
   - Wires of various lengths
   - Breadboard                       : 1
 
-Example Setup:
-
-![image](https://github.com/STARS-Design-Track-2023/MatrixMonSTARS/assets/126794890/027a793b-72ee-4299-9448-4f7d20148b9f)
-
-
-## RTL Diagrams
+Example:
 
 <p align="center">
-  <img src="/docs/top_RTL.png" alt="Chip IO"/>
+  <img src="/img/example.png" alt="example" width="500" height="auto"/>
 </p>
 
-## Some Legal Statement
-TBD
+
+## TOP RTL Diagram
+
+<p align="center">
+  <img src="/docs/top_RTL.png" alt="Top RTL"/>
+</p>

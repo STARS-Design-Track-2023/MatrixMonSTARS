@@ -1,0 +1,66 @@
+<mxfile host="app.diagrams.net" modified="2023-07-06T21:29:51.157Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0" etag="4a7FeZbsggjAMrez5Prv" version="21.5.2" type="device">
+  <diagram name="Page-1" id="PsOzM9urtcR5xl4BP-rr">
+    <mxGraphModel dx="794" dy="461" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Wsges08zZl9t_oPvOR08-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="Wsges08zZl9t_oPvOR08-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="720" y="185" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wsges08zZl9t_oPvOR08-11" value="7/" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="Wsges08zZl9t_oPvOR08-4" vertex="1" connectable="0">
+          <mxGeometry x="-0.3371" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wsges08zZl9t_oPvOR08-1" value="seven&lt;br&gt;segment &lt;br&gt;msd decode&lt;br&gt;logic" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="520" y="140" width="90" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Wsges08zZl9t_oPvOR08-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="Wsges08zZl9t_oPvOR08-2" target="Wsges08zZl9t_oPvOR08-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Wsges08zZl9t_oPvOR08-5" value="msd result[7:4] 4/" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="Wsges08zZl9t_oPvOR08-3" vertex="1" connectable="0">
+          <mxGeometry x="-0.3" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wsges08zZl9t_oPvOR08-2" value="result" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="290" y="170" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Wsges08zZl9t_oPvOR08-7" value="segments[13:7]" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="720" y="170" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Wsges08zZl9t_oPvOR08-10" value="&lt;div&gt;&lt;b&gt;Seven Segment Decode Logic: &lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&amp;nbsp;&lt;/b&gt;case(msd)&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 4&#39;b0000: begin&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; segments[13:7] = 7&#39;b0111111;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; end&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 4&#39;b0001: begin segments[13:7] = 7&#39;b0000110;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; end&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 4&#39;b0010: begin segments[13:7] = 7&#39;b1011011;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; end&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 4&#39;b0011: begin segments[13:7] = 7&#39;b1001111;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; end&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 4&#39;b0100: begin segments[13:7] = 7&#39;b1100110;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; end&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 4&#39;b0101: begin segments[13:7] = 7&#39;b1101101;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; end&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 4&#39;b0110: begin segments[13:7] = 7&#39;b1111101;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; end&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 4&#39;b0111: begin segments[13:7] = 7&#39;b0000111;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; end&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 4&#39;b1000: begin segments[13:7] = 7&#39;b1111111;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; end&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 4&#39;b1001: begin segments[13:7] = 7&#39;b1101111;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; end&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; default: begin segments[13:7] = 7&#39;b0;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; end&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; endcase&lt;br&gt;&lt;br&gt;&lt;b&gt;Note: Although the least significant digit is not shown here. The cases are identical&lt;/b&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="70" y="340" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Wsges08zZl9t_oPvOR08-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="Wsges08zZl9t_oPvOR08-14" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="720" y="295" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wsges08zZl9t_oPvOR08-13" value="7/" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="Wsges08zZl9t_oPvOR08-12" vertex="1" connectable="0">
+          <mxGeometry x="-0.3371" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wsges08zZl9t_oPvOR08-14" value="seven&lt;br&gt;segment &lt;br&gt;lsd decode&lt;br&gt;logic" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="520" y="250" width="90" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Wsges08zZl9t_oPvOR08-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="Wsges08zZl9t_oPvOR08-2" target="Wsges08zZl9t_oPvOR08-14" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="419.9999999999999" y="295" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wsges08zZl9t_oPvOR08-16" value="lsd result[3:0] 4/" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="Wsges08zZl9t_oPvOR08-15" vertex="1" connectable="0">
+          <mxGeometry x="-0.3" y="-1" relative="1" as="geometry">
+            <mxPoint x="93" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wsges08zZl9t_oPvOR08-18" value="segments[6:0]" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="720" y="280" width="100" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

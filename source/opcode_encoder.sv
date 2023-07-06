@@ -8,7 +8,8 @@ module opcode_encoder(
 
 
 logic [1:0] keypad_async, keypad_sync, keypad_13;
-//logic keystrobe;
+logic keystrobe;
+
 always_ff @(posedge clk, negedge nrst) begin
     if(0 == nrst) begin
         keypad_async <= 0;
@@ -22,12 +23,21 @@ always_ff @(posedge clk, negedge nrst) begin
     end
 end
 
+always_comb begin
+    if((|keypad_sync) && ~(|keypad_13)) begin
+        keystrobe = 1'b1;
+    end
+    else begin
+        keystrobe = 1'b0;
+    end
+end
+
 always_comb begin : OpcodeCombinationalLogic
     out = 'b0;
     is_op = 'b0;
     is_result = 'b0;
     is_enter = 'b0;
-    // if(keystrobe)
+    if(keystrobe)
         case(keypad_sync)
         2'b01: begin // added
                 out = 3'b001;

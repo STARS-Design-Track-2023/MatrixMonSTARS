@@ -37,7 +37,7 @@ always_comb begin : OpcodeCombinationalLogic
     is_op = 'b0;
     is_result = 'b0;
     is_enter = 'b0;
-    if(keystrobe)
+    if(keystrobe) begin
         case(keypad_sync)
         2'b01: begin // added
                 out = 3'b001;
@@ -51,8 +51,8 @@ always_comb begin : OpcodeCombinationalLogic
                 is_result = 1;
                 is_enter = 0;
                 end 
-
         endcase
+    end
     end
 endmodule
     

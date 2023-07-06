@@ -1,4 +1,5 @@
-module read_fsm(
+module read_fsm
+(
     input logic clk, nrst, r_en,
     input logic [2:0] reg_num, opcode,
     output logic [2:0] reg_sel, 
@@ -7,10 +8,22 @@ module read_fsm(
     output logic result_ready
 );
 
+    // State Machine
     typedef enum logic [2:0] {IDLE, EN, REG1, IDLE2, REG2, IDLE3, RESULT } state_t;
-    state_t state, next_state;
-    
 
+    // Intermediate Signals
+    state_t state, next_state;
+    logic   p_r_en;
+
+    
+    // Edge detection for the read
+    sync_edge_detector s_e_detect
+    (
+        .clk(clk),
+        .nrst(nrst),
+        .signal(r_en),
+        .p_edge(p_r_en)
+    );
 
     always_ff @(posedge clk, negedge nrst) begin
         if (~nrst) begin
@@ -24,7 +37,7 @@ module read_fsm(
     always_comb begin
         next_state = state;
         case (state)
-            IDLE:  if (r_en) next_state = EN;
+            IDLE:  if (p_r_en) next_state = EN;
             EN:    if (|reg_num) next_state = REG1;
             REG1:  next_state = IDLE2;
             IDLE2: if (|reg_num) next_state = REG2;
@@ -58,8 +71,8 @@ module read_fsm(
     always_comb begin
         reg_sel = 3'b0;
         case (next_state)
-        REG1: reg_sel = reg_num;
-        REG2: reg_sel = reg_num;
+            REG1: reg_sel = reg_num;
+            REG2: reg_sel = reg_num;
         endcase
     end
 

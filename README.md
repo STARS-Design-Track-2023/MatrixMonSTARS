@@ -43,5 +43,5 @@ Example:
 ## TOP RTL Diagram
 
 <p align="center">
-  <img src="/docs/top_RTL.png" alt="Top RTL"/>
+  <img src="/docs/pdfs/Top Module.drawio.pdf" alt="Top RTL"/>
 </p>

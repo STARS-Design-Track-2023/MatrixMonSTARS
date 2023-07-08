@@ -33,7 +33,7 @@ Outputs :
 
 
 <p align="center">
-  <img src="/img/io.png" alt="Chip IO" width="600" height="auto"/>
+  <img src="/img/io.png" alt="Chip IO" width="900" height="auto"/>
 </p>
 
 ## Supporting Equipment

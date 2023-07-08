@@ -36,6 +36,11 @@ Outputs :
   <img src="/img/io.png" alt="Chip IO" width="900" height="auto"/>
 </p>
 
+## TOP RTL Diagram
+<p align="center">
+  <img src="/img/top_RTL.png" alt="Top RTL"/>
+</p>
+
 ## Supporting Equipment
 **Required Equipments**:
   - Common cathode 7 segment displays: 2
@@ -51,11 +56,4 @@ Outputs :
 **Example**:
 <p align="center">
   <img src="/img/example.png" alt="example" width="500" height="auto"/>
-</p>
-
-
-## TOP RTL Diagram
-
-<p align="center">
-  <img src="/img/top_RTL.png" alt="Top RTL"/>
 </p>

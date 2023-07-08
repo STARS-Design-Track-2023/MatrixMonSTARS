@@ -22,7 +22,7 @@ Input/Ouput (IO) of Integrated Circuit (IC):
 </p>
 
 ## Supporting Equipment
-Required Equipments:
+**Required Equipments**:
   - Common cathode 7 segment displays: 2
   - LED (red)                        : 1
   - LED (blue)                       : 1
@@ -33,8 +33,7 @@ Required Equipments:
   - Wires of various lengths
   - Breadboard                       : 1
 
-Example:
-
+**Example**:
 <p align="center">
   <img src="/img/example.png" alt="example" width="500" height="auto"/>
 </p>
@@ -43,5 +42,5 @@ Example:
 ## TOP RTL Diagram
 
 <p align="center">
-  <img src="/docs/pdfs/Top Module.drawio.pdf" alt="Top RTL"/>
+  <img src="/img/top_RTL.png" alt="Top RTL"/>
 </p>

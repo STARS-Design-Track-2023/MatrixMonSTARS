@@ -42,5 +42,5 @@ Input/Ouput (IO) of Integrated Circuit (IC):
 ## TOP RTL Diagram
 
 <p align="center">
-  <img src="/docs/top_RTL.png" alt="Top RTL"/>
+  <img src="/img/top_RTL.png" alt="Top RTL"/>
 </p>

@@ -1,0 +1,30 @@
+<mxfile host="app.diagrams.net" modified="2023-07-06T21:29:58.866Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0" etag="HjMD32mmCXmBdfMYBFtp" version="21.5.2" type="device">
+  <diagram name="Page-1" id="CIpwB-ReqaZDZc7wj30R">
+    <mxGraphModel dx="794" dy="461" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="xozkaZhmaf2lUuItLCeN-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="xozkaZhmaf2lUuItLCeN-1" target="xozkaZhmaf2lUuItLCeN-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xozkaZhmaf2lUuItLCeN-1" value="keycode" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="100" y="200" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xozkaZhmaf2lUuItLCeN-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="xozkaZhmaf2lUuItLCeN-2" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="215" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xozkaZhmaf2lUuItLCeN-2" value="Negative Number&lt;br&gt;Convert&lt;br&gt;Logic" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="270" y="160" width="110" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="xozkaZhmaf2lUuItLCeN-5" value="digit_con" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="500" y="192.5" width="100" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="xozkaZhmaf2lUuItLCeN-6" value="&lt;b&gt;Negative Convert Logic:&lt;/b&gt;&lt;br&gt;&amp;nbsp;{max_logic_lsd, max_logic_msd, carry_lsd, correction_lsd, correction_msd} = 0;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; digit_con = digit;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; if(digit == 9&#39;b100000000) begin&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; digit_con = 9&#39;b000000000;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; end&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; else if(digit[8] == 1) begin&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; digit_con[3:0] = 4&#39;b1001 - digit[3:0] + 1;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; max_logic_lsd = (digit_con[3] &amp;amp;&amp;amp; digit_con[2]) || (digit_con[3] &amp;amp;&amp;amp; digit_con[1]);&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; correction_lsd = {1&#39;b0, max_logic_lsd, max_logic_lsd, 1&#39;b0};&lt;br&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; {carry_lsd, digit_con[3:0]} = digit_con[3:0] + correction_lsd;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; digit_con[7:4] = 4&#39;b1001 - digit[7:4] + {3&#39;b000, carry_lsd};&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; max_logic_msd = (digit_con[7] &amp;amp;&amp;amp; digit_con[6]) || (digit_con[7] &amp;amp;&amp;amp; digit_con[5]);&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; correction_msd = {1&#39;b0, max_logic_msd, max_logic_msd, 1&#39;b0};&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; digit_con[7:4] = digit_con[7:4] + correction_msd;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; end&lt;br&gt;&amp;nbsp; end&lt;br&gt;endmodule" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="40" y="450" width="610" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
